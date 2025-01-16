@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #111;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            width: 400px;
+            text-align: center;
+        }
+        input[type="text"], input[type="password"] {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #222;
+            color: #fff;
+        }
+        button {
+            padding: 10px 20px;
+            background: goldenrod;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #daa520;
+        }
+        .signup-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .signup-link a {
+            color: goldenrod;
+            text-decoration: none;
+        }
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <input type="text" id="login-username" placeholder="Username" required>
+        <input type="password" id="login-password" placeholder="Password" required>
+        <button onclick="logIn()">Login</button>
+        <p class="error" id="login-error"></p>
+        <div class="signup-link">
+            <p>New User? <a href="signup.html">Sign Up</a></p>
+        </div>
+    </div>
+    <script>
+        function logIn() {
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const errorElement = document.getElementById('login-error');
+
+            if (username === '' || password === '') {
+                errorElement.textContent = 'Please fill in both fields.';
+                return;
+            }
+
+            const storedPassword = localStorage.getItem(username);
+            if (storedPassword && storedPassword === password) {
+                // Redirect to details.html
+                window.location.href = 'details.html';
+            } else {
+                errorElement.textContent = 'Invalid username or password.';
+            }
+        }
+    </script>
+</body>
+</html>

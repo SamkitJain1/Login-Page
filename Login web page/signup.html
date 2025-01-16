@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #111;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            width: 400px;
+            text-align: center;
+        }
+        input[type="text"], input[type="password"] {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #222;
+            color: #fff;
+        }
+        button {
+            padding: 10px 20px;
+            background: goldenrod;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #daa520;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <input type="text" id="signup-username" placeholder="Username" required>
+        <input type="password" id="signup-password" placeholder="Password" required>
+        <button onclick="signUp()">Sign Up</button>
+        <p class="error" id="signup-error"></p>
+    </div>
+    <script>
+        function signUp() {
+            const username = document.getElementById('signup-username').value.trim();
+            const password = document.getElementById('signup-password').value.trim();
+            const errorElement = document.getElementById('signup-error');
+
+            if (username === '' || password === '') {
+                errorElement.textContent = 'Please fill in both fields.';
+                return;
+            }
+
+            if (localStorage.getItem(username)) {
+                errorElement.textContent = 'Username already exists. Please choose a different username.';
+                return;
+            }
+
+            // Save user details in LocalStorage
+            localStorage.setItem(username, password);
+            errorElement.style.color = 'green';
+            errorElement.textContent = 'Sign Up successful! Redirecting to login...';
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000); // Redirect after 2 seconds
+        }
+    </script>
+</body>
+</html>
